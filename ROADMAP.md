@@ -63,7 +63,7 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 - [ ] DIY Recipe Unlocker — learn every recipe, golden tools included (bitfield manipulation)
 
 ### 🏝️ Island & Environment
-- [ ] Multi-Villager Support — edit Player 1–8 house blocks (Villager0–7, Base + player_index * 0x28A28)
+- [ ] Multi-Villager Support — edit Player 1–8 house blocks (Villager0–7, Base + player_index * 0x28A28); doubles as the community-requested Player/Account Selection
 - [ ] Villager Management — force specific villagers to move in, kick out unwanted villagers, edit catchphrases
 - [ ] Player Customization — edit Player Name, Appearance, Passport info, and Catchphrase
 - [ ] Island Infrastructure — max out all bridges/inclines, change Native Fruit, force K.K. Slider songs
@@ -71,6 +71,7 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 ### 📦 Inventory & Storage
 - [ ] House Storage Editing — parse and edit the ~2,400+ slot storage array with pagination/search
 - [ ] Custom Design Slot Management — clear all designs or inject popular design IDs
+- [ ] **Custom Pattern Editor (community request)** — view, import, replace, and delete custom designs directly in-app (inspired by ACNHDesignPatternEditor)
 
 ### 🛡️ Safety & Reliability
 - [ ] Game Version Validator — warn if save offsets don't match your game version
@@ -82,6 +83,7 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 ### 🧪 Quality of Life & QA
 - [ ] Crash Logging — write a `crash.log` to the SD card on unrecoverable SDL2 errors for easy debugging
 - [ ] Beta Testing Channel — establish a Discord/GitHub Pre-release channel for power users to test features early
+- [ ] **Embedded Homebrew Icon (community request)** — embed the leaf PNG into the `.nro` so the Homebrew Menu displays the proper icon instead of the default loading icon
 
 ---
 
@@ -108,7 +110,7 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 - [ ] Save File "Diff" Viewer — compare backup and current save side-by-side before writing
 
 ### 🌍 Community & Localization
-- [ ] Multi-Language UI — localized items.txt and UI strings (EN, ES, FR, DE, JA, KO) with boot-time selector
+- [ ] Multi-Language UI — localized items.txt and UI strings (EN, ES, FR, DE, JA, KO) with boot-time selector (Spanish prioritized per community request)
 - [ ] Contributing.md — official guide for community devs to submit Pull Requests and translations
 
 ### 🛠️ Quality of Life
