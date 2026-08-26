@@ -18,11 +18,12 @@ export OBJCOPY	:=	$(PREFIX)objcopy
 export STRIP	:=	$(PREFIX)strip
 
 ARCH		:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
-CFLAGS		:=	-g -Wall -O2 -ffunction-sections $(ARCH) -D__SWITCH__
+CFLAGS		:=	-g -Wall -O2 -ffunction-sections -fdata-sections $(ARCH) -D__SWITCH__
 CXXFLAGS	:=	$(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17
 LDFLAGS		:=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
-LIBS := -lSDL2 -lSDL2_ttf -Wl,--start-group -lfreetype -lharfbuzz -lpng16 -lbz2 -lz -Wl,--end-group -lEGL -lglapi -ldrm_nouveau -lnx
-LIBDIRS		:=	$(DEVKITPRO)/libnx
+
+LIBS		:= -lSDL2 -lSDL2_ttf -Wl,--start-group -lfreetype -lharfbuzz -lpng16 -lbz2 -lz -Wl,--end-group -lEGL -lglapi -ldrm_nouveau -lnx
+LIBDIRS		:=	$(DEVKITPRO)/libnx $(DEVKITPRO)/portlibs/switch
 
 #---------------------------------------------------------------------------------
 TARGET      := acnh_editor
@@ -30,10 +31,14 @@ BUILD       := build
 SOURCES     := source
 INCLUDES    := include
 
-APP_TITLE   := ACNH Save Editor
-APP_AUTHOR  := You
-APP_VERSION := 0.1.0
+APP_TITLE	:=	ACNH Save Editor
+APP_AUTHOR	:=	cbreezy210
+APP_VERSION	:=	1.4.0
 #---------------------------------------------------------------------------------
+
+CFLAGS += -I$(DEVKITPRO)/portlibs/switch/include
+CXXFLAGS += -I$(DEVKITPRO)/portlibs/switch/include
+LDFLAGS += -L$(DEVKITPRO)/portlibs/switch/lib
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 
@@ -41,6 +46,9 @@ export OUTPUT   := $(CURDIR)/$(TARGET)
 export TOPDIR   := $(CURDIR)
 export VPATH    := $(foreach dir,$(SOURCES),$(CURDIR)/$(dir))
 export DEPSDIR  := $(CURDIR)/$(BUILD)
+
+# Define APP_ICON here so TOPDIR is properly resolved
+export APP_ICON := $(TOPDIR)/icon.jpg
 
 CFILES      := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 CPPFILES    := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
@@ -71,9 +79,10 @@ DEPENDS := $(OFILES:.o=.d)
 
 all: $(OUTPUT).nro
 
+# FIXED: Added --icon=$(APP_ICON) to embed the leaf logo into the Homebrew Menu!
 $(OUTPUT).nro: $(OUTPUT).elf $(OUTPUT).nacp
 	@echo creating ... $(notdir $@)
-	@elf2nro $(OUTPUT).elf $@ --nacp=$(OUTPUT).nacp
+	@elf2nro $(OUTPUT).elf $@ --nacp=$(OUTPUT).nacp --icon=$(APP_ICON)
 
 $(OUTPUT).nacp:
 	@echo creating ... $(notdir $@)
@@ -83,6 +92,7 @@ $(OUTPUT).elf: $(OFILES)
 	@echo linking $(notdir $@)
 	@$(LD) $(LDFLAGS) $(OFILES) $(LIBPATHS) $(LIBS) -o $@
 
+# FIXED: Moved romfs object rules INSIDE the else block so they actually compile
 main_dat.o: $(TOPDIR)/romfs/main.dat
 	@echo embedding $(notdir $<)
 	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 main.dat $(CURDIR)/main_dat.o
@@ -95,6 +105,14 @@ landname_dat.o: $(TOPDIR)/romfs/landname.dat
 	@echo embedding $(notdir $<)
 	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 landname.dat $(CURDIR)/landname_dat.o
 
+personal_dat.o: $(TOPDIR)/romfs/personal.dat
+	@echo embedding $(notdir $<)
+	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 personal.dat $(CURDIR)/personal_dat.o
+
+personalHeader_dat.o: $(TOPDIR)/romfs/personalHeader.dat
+	@echo embedding $(notdir $<)
+	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 personalHeader.dat $(CURDIR)/personalHeader_dat.o
+
 %.o: %.cpp
 	@echo compiling $(notdir $<)
 	@$(CXX) -MMD -MP $(CXXFLAGS) $(INCLUDE) -c $< -o $@
@@ -105,19 +123,8 @@ landname_dat.o: $(TOPDIR)/romfs/landname.dat
 
 %.o: %.s
 	@echo assembling $(notdir $<)
-	@$(AS) $(ASFLAGS) -c $< -o $@
+	@$(AS) -MMD -MP -c $< -o $@
 
 -include $(DEPENDS)
 
 endif
-personal_dat.o: $(TOPDIR)/romfs/personal.dat
-	@echo embedding $(notdir $<)
-	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 personal.dat $(CURDIR)/personal_dat.o
-
-personalHeader_dat.o: $(TOPDIR)/romfs/personalHeader.dat
-	@echo embedding $(notdir $<)
-	@cd $(TOPDIR)/romfs && $(OBJCOPY) -I binary -O elf64-littleaarch64 -B aarch64 personalHeader.dat $(CURDIR)/personalHeader_dat.o
-CFLAGS += -I$(DEVKITPRO)/portlibs/switch/include
-CXXFLAGS += -I$(DEVKITPRO)/portlibs/switch/include
-LIBDIRS += $(DEVKITPRO)/portlibs/switch
-LDFLAGS += -L$(DEVKITPRO)/portlibs/switch/lib
