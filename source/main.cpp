@@ -138,22 +138,35 @@ const uint32_t MILES_OFF  = 0x12718;
 const uint32_t LOAN_OFF   = 0x33CBF0;
 const uint32_t POCKETS_BASE = 0x37CA8;
 
-struct Fav { int id; const char* label; };
-static const Fav FAVS[] = {
-    { 5851, "Nook Miles Ticket" },
-    { 5983, "Star Fragment" },
-    { 5984, "Large Star Fragment" },
-    { 2505, "Gold Nugget" },
-    { 2511, "Iron Nugget" },
-    { 2513, "Customization Kit" },
-    { 8179, "Golden Net" },
-    { 8533, "Golden Watering Can" },
-    { 8574, "Golden Shovel" },
-    { 8578, "Golden Slingshot" },
-    { 8660, "Golden Rod" },
-    { 9617, "Golden Axe" },
+// ================= UPDATED: Paginated Favorites (Resolved by Name, A-Z) =================
+struct Fav { uint16_t id; const char* label; };
+static const char* FAV_NAMES[] = {
+    "Nook Miles Ticket",
+    "Bell bag",
+    "Bell voucher",
+    "99,000 Bells",
+    "gold roses",
+    "cherry-blossom petal",
+    "star fragment",
+    "large star fragment",
+    "star wand",
+    "gold nugget",
+    "iron nugget",
+    "pearl",
+    "gold bars",
+    "customization kit",
+    "golden axe",
+    "golden net",
+    "golden rod",
+    "golden shovel",
+    "golden slingshot",
+    "golden watering can",
+    "crown (No Variations)",
+    "royal crown (No Variations)"
 };
-static const int FAV_COUNT = 12;
+static const int FAV_MAX = (int)(sizeof(FAV_NAMES) / sizeof(FAV_NAMES[0]));
+static Fav FAVS[FAV_MAX];
+static int FAV_COUNT = 0;
 
 static const char* LOADOUT_NAMES[] = {"Mining", "Fishing", "Terraforming", "Custom 1", "Custom 2"};
 static const int LOADOUT_COUNT = 5;
@@ -204,6 +217,35 @@ static std::vector<Item> g_allItems;
 static std::vector<Item> g_searchResults;
 static std::string g_searchQuery = "";
 static int g_searchSel = 0;
+
+// ================= NEW: Dynamic Favorites Builder (Alphabetical) =================
+uint16_t findItemIdByName(const std::string& name) {
+    for (const auto& item : g_allItems) {
+        if (item.name == name) return item.id;
+    }
+    return 0xFFFE; // Fallback to empty slot if not found
+}
+
+static bool favAlphaLess(const Fav& a, const Fav& b) {
+    const char* pa = a.label;
+    const char* pb = b.label;
+    while (*pa && *pb) {
+        char ca = (char)std::tolower((unsigned char)*pa);
+        char cb = (char)std::tolower((unsigned char)*pb);
+        if (ca != cb) return ca < cb;
+        pa++; pb++;
+    }
+    return (*pa == '\0') && (*pb != '\0');
+}
+
+void buildFavorites() {
+    FAV_COUNT = FAV_MAX;
+    for (int i = 0; i < FAV_COUNT; i++) {
+        FAVS[i].label = FAV_NAMES[i];
+        FAVS[i].id = findItemIdByName(FAV_NAMES[i]);
+    }
+    std::sort(FAVS, FAVS + FAV_COUNT, favAlphaLess);
+}
 
 // ================= UPDATED: Dynamic Status Buffer =================
 static char g_status_buf[128] = "Ready. ZL restores backup. (+) Search, (A) Save/Quit";
@@ -303,14 +345,21 @@ static void buildUI(uint8_t* personal) {
         addText(fSmall, "Up/Dn select | < > step | L R big step", brown, 360, 540);
         addText(fSmall, "A save/quit | - clear | X favs | Y loads | + search", brown, 320, 570);
     } else if (g_screen == 1) {
-        int y = 220; const int LH = 27;
-        for (int i = 0; i < FAV_COUNT; i++) {
-            if (i == g_favSel) { hl = { 210, y - 4, 860, 28 }; hlOn = true; addText(fSmall, FAVS[i].label, cream, 234, y); }
-            else { addText(fSmall, FAVS[i].label, brown, 234, y); }
+        // ================= UPDATED: Paginated Favorites Rendering =================
+        int y = 220; const int LH = 38;
+        int startIdx = (g_favSel / 8) * 8;
+        int endIdx = std::min(FAV_COUNT, startIdx + 8);
+        for (int i = startIdx; i < endIdx; i++) {
+            char linebuf[96];
+            snprintf(linebuf, sizeof(linebuf), "%04X - %s", (unsigned)FAVS[i].id, FAVS[i].label);
+            if (i == g_favSel) { hl = { 210, y - 4, 860, 32 }; hlOn = true; addText(fSmall, linebuf, cream, 234, y); }
+            else { addText(fSmall, linebuf, brown, 234, y); }
             y += LH;
         }
-        snprintf(buf, sizeof buf, "Count: %d   |   < > count   A pick slot   X back   + exit", g_favCount);
-        addText(fSmall, buf, brown, 234, 570);
+        int page = (g_favSel / 8) + 1;
+        int pages = (FAV_COUNT + 7) / 8;
+        snprintf(buf, sizeof buf, "Count: %d  Pg %d/%d  |  < > count  A slot  X back", g_favCount, page, pages);
+        addText(fSmall, buf, brown, 300, 570);
     } else if (g_screen == 2) {
         int y0 = 220; const int LH = 30;
         for (int s = 1; s <= 20; s++) {
@@ -352,8 +401,8 @@ static void buildUI(uint8_t* personal) {
             addText(fSmall, searchBuf, brown, 234, y);
             y += 35;
 
-            int startIdx = (g_searchSel / 8) * 8;
-            int endIdx = std::min((int)g_searchResults.size(), startIdx + 8);
+            int startIdx = (g_searchSel / 6) * 6;
+            int endIdx = std::min((int)g_searchResults.size(), startIdx + 6);
             
             for (int i = startIdx; i < endIdx; i++) {
                 char linebuf[128];
@@ -396,7 +445,7 @@ int main(int argc, char** argv) {
     fSmall = TTF_OpenFont("sdmc:/switch/acnh_editor/font.ttf", 24);
 
     SDL_Color creamC = { 0xF8, 0xF5, 0xEC, 255 };
-    SDL_Texture* title = makeText(fTitle, "ACNH Save Editor v1.3", creamC);
+    SDL_Texture* title = makeText(fTitle, "ACNH Save Editor v1.4", creamC);
     int titleW = 0, titleH = 0;
     if (title) SDL_QueryTexture(title, nullptr, nullptr, &titleW, &titleH);
 
@@ -420,6 +469,7 @@ int main(int argc, char** argv) {
             id++;
         }
         fclose(it);
+        buildFavorites(); // Resolve IDs dynamically at boot
     } else {
         snprintf(g_status_buf, sizeof(g_status_buf), "No items.txt on SD!");
     }
