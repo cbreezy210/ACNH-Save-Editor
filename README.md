@@ -58,3 +58,7 @@ After building, copy `acnh_editor.nro` and `icon.png` from the repo root, along 
 ## ⚠️ Disclaimer
 
 This is an educational project. Always keep backups of your save files. Modifying save data always carries a risk. I am not responsible for corrupted islands or banned consoles. Use at your own risk!
+
+## 💬 Community & Release Discussion
+
+- Reddit — v1.4.0 release thread: https://www.reddit.com/r/SwitchHacks/comments/1vzs3p7/updaterelease_acnh_save_editor_v140_native_switch/
