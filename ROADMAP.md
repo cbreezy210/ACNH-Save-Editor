@@ -49,16 +49,26 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 
 ---
 
-## 🟡 Coming Next — v1.5.x (Stalk Market, Safety & Deep Edit Update)
+## 🟡 Coming Next — v1.5.x (Decorations, Safety & Deep Edit Update)
 *Target Release: Q4 2026*
 
-### 💰 Money & Progression
-- [ ] **Stalk Market Assistant (Turnip Pattern Prediction) — v1.5.0 HEADLINE** — Read-only & non-destructive: reads your buy price + revealed AM/PM prices and runs the documented pattern algorithm (Fluctuating / Large Spike / Decreasing / Small Spike) to predict the week's prices. Your save stays 100% forensically clean.
-- [ ] Turnip Price Overwrite (opt-in advanced) — set your own weekly stalk market prices, force Big/Small Spike patterns. Ships only AFTER the prediction feature.
-- [ ] Nook Miles & Achievements Unlocker — unlock all Nook Miles+ achievements and passport stamps
+### 🎨 Room Decorations (Community Priority)
+- [ ] **Room Decorations Injector — v1.5.0 HEADLINE** — Inject furniture, wallpapers, and flooring directly into player rooms. Requested by `solamentenieves` on GBATemp. Fills a major gap in on-console tools.
+- [ ] **Furniture Placement Editor** — Move, rotate, and scale placed items within a room grid.
+- [ ] **Wallpaper/Flooring Swapper** — Instantly change room aesthetics without buying/cataloguing items first.
 
-### 🌟 God-Mode Unlocks
-- [ ] DIY Recipe Unlocker — learn every recipe, golden tools included (bitfield manipulation)
+### 🛡️ Safety & Reliability
+- [ ] **Backup Verification** — Checksum/size validation after SD backup creation (abort write if 0-byte or mismatch to prevent corruption).
+- [ ] Game Version Validator — warn if save offsets don't match your game version
+- [ ] "Dry Run" Preview Mode — see exactly what will change before writing to NAND
+- [ ] Rolling Backup Manager — keep the last 3 backups with timestamps and version tracking
+- [ ] "Safe Mode" Toggle — restrict edits to offline-safe values to prevent console bans
+- [ ] Sanity Checks — automatically prevent impossible values (e.g., negative Bells, invalid Item IDs)
+
+###  Inventory & Storage
+- [ ] House Storage Editing — parse and edit the ~2,400+ slot storage array with pagination/search
+- [ ] Custom Design Slot Management — clear all designs or inject popular design IDs
+- [ ] **Custom Pattern Editor (community request)** — view, import, replace, and delete custom designs directly in-app (inspired by ACNHDesignPatternEditor)
 
 ### 🏝️ Island & Environment
 - [ ] Multi-Villager Support — edit Player 1–8 house blocks (Villager0–7, Base + player_index * 0x28A28); doubles as the community-requested Player/Account Selection
@@ -66,26 +76,29 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 - [ ] Player Customization — edit Player Name, Appearance, Passport info, and Catchphrase
 - [ ] Island Infrastructure — max out all bridges/inclines, change Native Fruit, force K.K. Slider songs
 
-### 📦 Inventory & Storage
-- [ ] House Storage Editing — parse and edit the ~2,400+ slot storage array with pagination/search
-- [ ] Custom Design Slot Management — clear all designs or inject popular design IDs
-- [ ] **Custom Pattern Editor (community request)** — view, import, replace, and delete custom designs directly in-app (inspired by ACNHDesignPatternEditor)
-
-### 🛡️ Safety & Reliability
-- [ ] Game Version Validator — warn if save offsets don't match your game version
-- [ ] "Dry Run" Preview Mode — see exactly what will change before writing to NAND
-- [ ] Rolling Backup Manager — keep the last 3 backups with timestamps and version tracking
-- [ ] "Safe Mode" Toggle — restrict edits to offline-safe values to prevent console bans
-- [ ] Sanity Checks — automatically prevent impossible values (e.g., negative Bells, invalid Item IDs)
-
 ### 🧪 Quality of Life & QA
 - [ ] Crash Logging — write a `crash.log` to the SD card on unrecoverable SDL2 errors for easy debugging
 - [ ] Beta Testing Channel — establish a Discord/GitHub Pre-release channel for power users to test features early
+- [ ] **items.txt Build Docs** — Document where the item database comes from for open-source contributors.
 
 ---
 
-## 🏝️ v1.6.0 — Island Blueprint Initiative (Phase A: Export-Only)
+## 🟠 v1.6.0 — Market & Recipes Update
 *Target Release: Early 2027*
+*(Moved from v1.5 based on community feedback prioritizing Decorations)*
+
+### 💰 Money & Progression
+- [ ] **Stalk Market Assistant (Turnip Pattern Prediction)** — Read-only & non-destructive: reads your buy price + revealed AM/PM prices and runs the documented pattern algorithm (Fluctuating / Large Spike / Decreasing / Small Spike) to predict the week's prices. Your save stays 100% forensically clean.
+- [ ] Turnip Price Overwrite (opt-in advanced) — set your own weekly stalk market prices, force Big/Small Spike patterns. Ships only AFTER the prediction feature.
+- [ ] Nook Miles & Achievements Unlocker — unlock all Nook Miles+ achievements and passport stamps
+
+### 🌟 God-Mode Unlocks
+- [ ] DIY Recipe Unlocker — learn every recipe, golden tools included (bitfield manipulation)
+
+---
+
+## 🏝️ v1.7.0 — Island Blueprint Initiative (Phase A: Export-Only)
+*Target Release: Mid 2027*
 - [ ] **Island Blueprint JSON Export (read-only, zero risk)** — export your full island layout (terrain, paths, placed furniture, building positions) to a standardized JSON file.
 - [ ] **Open Blueprint JSON Schema** — published as a community standard so layouts can be shared and adopted by other tools.
 - [ ] *No import in this phase* — keeps your save 100% safe while the format matures.
@@ -93,7 +106,7 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 ---
 
 ## 🔴 Long-Term — v2.0.0 (Architecture & Community Overhaul)
-*Target Release: 2027*
+*Target Release: Late 2027*
 
 ### 🏝️ Island Blueprint Import (Phase B)
 - [ ] **Blueprint Import** — apply community JSON blueprints to reshape your island, gated behind the Dry-Run Diff viewer with conflict validation.

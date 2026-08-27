@@ -22,6 +22,9 @@ For full memory and SD card access, you **MUST** launch this app via **Title Ove
 *   **Automatic Hash Healing:** Recalculates Murmur3 hashes and EncryptedInt32 checksums so the game never detects corruption.
 *   **Embedded Homebrew Icon:** The `.nro` now includes the custom leaf icon so the Homebrew Menu displays it properly instead of the default loading icon.
 
+## 🎨 Coming in v1.5: Room Decorations Injector
+Based on your feedback! Inject furniture, wallpapers, and flooring directly into your rooms. Still deciding between Turnip Price Trends or DIY Recipe Unlocks for v1.6 — which would you rather see? Let us know on GitHub Discussions!
+
 ## 📥 Installation
 
 1. Ensure your Switch is running Custom Firmware (Atmosphere).
