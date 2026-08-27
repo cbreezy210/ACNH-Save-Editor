@@ -5,6 +5,11 @@ A 100% native Nintendo Switch homebrew application for editing *Animal Crossing:
 ![Version](https://img.shields.io/badge/version-1.4.0-green)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
+## ⚠️ CRITICAL LAUNCH INSTRUCTIONS
+For full memory and SD card access, you **MUST** launch this app via **Title Override** (hold [R] while launching a game like Animal Crossing) OR install it as a forwarder.
+
+**Do NOT launch it from the Album / Applet mode**, or the app will not have permission to create SD card backups or read the item database, which will cause crashes or prevent saving!
+
 ## ✨ Features (v1.4.0)
 
 *   **Dual-File Engine:** Edits both `personal.dat` (Wallet, Bank, Pockets, Nook Miles) and `main.dat` (House Loan) simultaneously.
