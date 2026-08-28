@@ -436,6 +436,37 @@ static void buildUI(uint8_t* personal) {
 }
 
 int main(int argc, char** argv) {
+    // --- APPLET MODE GUARD ---
+    consoleInit(NULL);
+    padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+    PadState guard_pad;
+    padInitializeDefault(&guard_pad);
+
+    if (appletGetAppletType() != AppletType_Application) {
+        consoleClear();
+        printf("\x1b[31m\n\n  !! ACNH SAVE EDITOR - LAUNCH ERROR !!\x1b[0m\n\n");
+        printf("  You launched from the Album (Applet Mode).\n");
+        printf("  This app needs full RAM + SD access to work safely.\n\n");
+        printf("  HOW TO FIX:\n");
+        printf("  1. Return to the Home Menu.\n");
+        printf("  2. Highlight Animal Crossing: New Horizons.\n");
+        printf("  3. HOLD [R] while pressing [A] to launch it.\n");
+        printf("  4. The Homebrew Menu will open. Launch the editor from there.\n\n");
+        printf("  Press [A] to exit.\n");
+        consoleUpdate(NULL);
+        
+        while (appletMainLoop()) {
+            padUpdate(&guard_pad);
+            if (padGetButtonsDown(&guard_pad) & HidNpadButton_A) break;
+            consoleUpdate(NULL);
+            svcSleepThread(16000000);
+        }
+        consoleExit(NULL);
+        return 0;
+    }
+    consoleExit(NULL);
+    // -------------------------
+
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* win = SDL_CreateWindow("ACNH SE", 0, 0, 1280, 720, SDL_WINDOW_FULLSCREEN);
     g_ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
