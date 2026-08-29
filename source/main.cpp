@@ -310,6 +310,7 @@ static int g_sel = 0;
 static int g_screen = 0;
 static int g_favSel = 0;
 static int g_favCount = 1;
+static bool g_repairArmed = false;
 
 static void addText(TTF_Font* f, const char* s, SDL_Color c, int x, int y) {
     SDL_Texture* t = makeText(f, s, c); if (t) ui.push_back({ t, x, y });
@@ -431,7 +432,7 @@ static void buildUI(uint8_t* personal) {
 
     SDL_Color sc = cream;
     if (strstr(g_status, "fail") || strstr(g_status, "BAK") || strstr(g_status, "Mount") || strstr(g_status, "FAILED") || strstr(g_status, "ERR")) sc = red;
-    else if (strncmp(g_status, "SAVED", 5) == 0 || strncmp(g_status, "Saved", 5) == 0 || strncmp(g_status, "Loaded", 6) == 0 || strncmp(g_status, "RESTORED", 8) == 0 || strncmp(g_status, "Selected", 8) == 0) sc = okc;
+    else if (strncmp(g_status, "SAVED", 5) == 0 || strncmp(g_status, "Saved", 5) == 0 || strncmp(g_status, "Loaded", 6) == 0 || strncmp(g_status, "RESTORED", 8) == 0 || strncmp(g_status, "Selected", 8) == 0 || strncmp(g_status, "REPAIRED", 8) == 0) sc = okc;
     addText(fSmall, g_status, sc, 234, 630);
 }
 
@@ -476,7 +477,7 @@ int main(int argc, char** argv) {
     fSmall = TTF_OpenFont("sdmc:/switch/acnh_editor/font.ttf", 24);
 
     SDL_Color creamC = { 0xF8, 0xF5, 0xEC, 255 };
-    SDL_Texture* title = makeText(fTitle, "ACNH Save Editor v1.4", creamC);
+    SDL_Texture* title = makeText(fTitle, "ACNH Save Editor v" APP_VERSION_STR, creamC);
     int titleW = 0, titleH = 0;
     if (title) SDL_QueryTexture(title, nullptr, nullptr, &titleW, &titleH);
 
@@ -540,6 +541,45 @@ int main(int argc, char** argv) {
         };
         findRegions(personal, pSz, pReg, pRegC, 16);
         findRegions(mainData, mSz, mReg, mRegC, 32);
+
+        // ---- SAVE DOCTOR v1.4.2: region layout memory ----
+        auto saveLayout = [&](const char* path, Region* arr, int cnt) {
+            FILE* f = fopen(path, "wb"); if (!f) return;
+            fwrite(&cnt, 4, 1, f);
+            for (int i = 0; i < cnt; i++) { fwrite(&arr[i].off, 4, 1, f); fwrite(&arr[i].len, 4, 1, f); }
+            fclose(f);
+        };
+        auto loadLayout = [&](const char* path, Region* arr, int& cnt, int maxR, size_t sz) {
+            FILE* f = fopen(path, "rb"); if (!f) return;
+            int n = 0; if (fread(&n, 4, 1, f) != 1) n = 0;
+            if (n < 1 || n > maxR) { fclose(f); return; }
+            Region tmp[32]; bool ok = true;
+            for (int i = 0; i < n; i++) {
+                if (fread(&tmp[i].off, 4, 1, f) != 1 || fread(&tmp[i].len, 4, 1, f) != 1) { ok = false; break; }
+                if (tmp[i].off + 4 + tmp[i].len > sz) ok = false;
+            }
+            if (ok) { for (int i = 0; i < n; i++) arr[i] = tmp[i]; cnt = n; }
+            fclose(f);
+        };
+        { // ---- v1.4.3: pick the BEST layout, never pollute the cache ----
+            static Region cacheP[16]; static Region cacheM[32];
+            int cachePC = 0, cacheMC = 0;
+            loadLayout("sdmc:/switch/acnh_editor/layout_personal.dat", cacheP, cachePC, 16, pSz);
+            loadLayout("sdmc:/switch/acnh_editor/layout_main.dat", cacheM, cacheMC, 32, mSz);
+            if (pRegC > 0 && pRegC >= cachePC) {
+                saveLayout("sdmc:/switch/acnh_editor/layout_personal.dat", pReg, pRegC);
+            } else if (cachePC > 0) {
+                for (int i = 0; i < cachePC; i++) pReg[i] = cacheP[i];
+                pRegC = cachePC;
+            }
+            if (mRegC > 0 && mRegC >= cacheMC) {
+                saveLayout("sdmc:/switch/acnh_editor/layout_main.dat", mReg, mRegC);
+            } else if (cacheMC > 0) {
+                for (int i = 0; i < cacheMC; i++) mReg[i] = cacheM[i];
+                mRegC = cacheMC;
+            }
+        }
+        // ---- end layout memory ----
 
         g_vals[0] = DecInt(LE32(personal + WALLET_OFF), personal[WALLET_OFF+6], LE16(personal + WALLET_OFF + 4));
         g_vals[1] = DecInt(LE32(personal + BANK_OFF), personal[BANK_OFF+6], LE16(personal + BANK_OFF + 4));
@@ -723,6 +763,71 @@ int main(int argc, char** argv) {
                     if (fm) fclose(fm);
                     needDraw = true;
                 }
+
+                // ---- SAVE DOCTOR (v1.4.1): ZR = repair pass ----
+                if (k & HidNpadButton_ZR) {
+                    if (!g_repairArmed) {
+                        g_repairArmed = true;
+                        snprintf(g_status_buf, sizeof(g_status_buf), "DOCTOR armed (%d p-regs)! ZR=repair, B=cancel", pRegC);
+                    } else {
+                        g_repairArmed = false;
+                        // 1) FORENSIC COPY of damaged encrypted state (never touches good backups)
+                        FsFileSystem sd2; bool forensics = false;
+                        if (R_SUCCEEDED(fsOpenSdCardFileSystem(&sd2))) {
+                            auto wrFile = [&](const char* p, const uint8_t* d, size_t s) -> bool {
+                                fsFsDeleteFile(&sd2, p);
+                                if (R_FAILED(fsFsCreateFile(&sd2, p, s, 0))) return false;
+                                FsFile f; if (R_FAILED(fsFsOpenFile(&sd2, p, FsOpenMode_Write, &f))) return false;
+                                Result w = fsFileWrite(&f, 0, d, s, FsWriteOption_Flush);
+                                fsFileClose(&f); return R_SUCCEEDED(w);
+                            };
+                            forensics = wrFile("/switch/acnh_editor/damaged_personal.dat", origP, pSz) &&
+                                        wrFile("/switch/acnh_editor/damaged_main.dat", origM, mSz);
+                            fsFsClose(&sd2);
+                        }
+                        // 2) Re-heal all detected regions
+                        for (int i = 0; i < pRegC; i++) WriteLE32(personal + pReg[i].off, Murmur3Hash(personal + pReg[i].off + 4, pReg[i].len));
+                        for (int i = 0; i < mRegC; i++) WriteLE32(mainData + mReg[i].off, Murmur3Hash(mainData + mReg[i].off + 4, mReg[i].len));
+                        // 3) GAP HEURISTIC: heal regions whose stored hash was too damaged to detect
+                        auto healGaps = [&](uint8_t* buf, Region* arr, int cnt) {
+                            uint32_t prev = 0x100;
+                            for (int i = 0; i < cnt; i++) {
+                                if (arr[i].off > prev + 4 + 16) {
+                                    uint32_t glen = arr[i].off - prev - 4;
+                                    WriteLE32(buf + prev, Murmur3Hash(buf + prev + 4, glen));
+                                }
+                                prev = arr[i].off + 4 + arr[i].len;
+                            }
+                        };
+                        healGaps(personal, pReg, pRegC);
+                        healGaps(mainData, mReg, mRegC);
+                        // 4) Re-apply EncryptedInt32 checksums on known fields
+                        applyEdit(personal, WALLET_OFF, g_vals[0]);
+                        applyEdit(personal, BANK_OFF, g_vals[1]);
+                        applyEdit(personal, MILES_OFF, g_vals[2]);
+                        applyEdit(mainData, LOAN_OFF, g_vals[3]);
+                        // 5) Encrypt -> snapshot -> write NAND -> decrypt for session consistency
+                        CryptACNH(pHdr, personal, pSz); CryptACNH(mHdr, mainData, mSz);
+                        memcpy(origP, personal, pSz); memcpy(origM, mainData, mSz);
+                        auto writeNandR = [&](const char* path, uint8_t* buf, size_t sz) -> bool {
+                            FsFile f; if (R_FAILED(fsFsOpenFile(&fs, path, FsOpenMode_Write, &f))) return false;
+                            Result w = fsFileWrite(&f, 0, buf, sz, FsWriteOption_Flush); fsFileClose(&f);
+                            return R_SUCCEEDED(w);
+                        };
+                        bool ok = writeNandR("/Villager0/personal.dat", personal, pSz) && writeNandR("/main.dat", mainData, mSz);
+                        if (ok) fsFsCommit(&fs);
+                        CryptACNH(pHdr, personal, pSz); CryptACNH(mHdr, mainData, mSz);
+                        if (ok) snprintf(g_status_buf, sizeof(g_status_buf), forensics ? "REPAIRED! Quit fully, then try the game." : "REPAIRED (no forensic copy) - quit & try game");
+                        else snprintf(g_status_buf, sizeof(g_status_buf), "Repair NAND write failed!");
+                    }
+                    needDraw = true;
+                }
+                if ((k & HidNpadButton_B) && g_repairArmed) {
+                    g_repairArmed = false;
+                    snprintf(g_status_buf, sizeof(g_status_buf), "Doctor disarmed.");
+                    needDraw = true;
+                }
+                // ---- end SAVE DOCTOR ----
 
                 if (d || big) {
                     if (g_sel <= 3) {

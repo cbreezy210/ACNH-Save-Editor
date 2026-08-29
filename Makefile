@@ -33,11 +33,11 @@ INCLUDES    := include
 
 APP_TITLE	:=	ACNH Save Editor
 APP_AUTHOR	:=	cbreezy210
-APP_VERSION	:=	1.4.0
+APP_VERSION	:=	1.4.1
 #---------------------------------------------------------------------------------
 
-CFLAGS += -I$(DEVKITPRO)/portlibs/switch/include
-CXXFLAGS += -I$(DEVKITPRO)/portlibs/switch/include
+CFLAGS += -I$(DEVKITPRO)/portlibs/switch/include -DAPP_VERSION_STR=\"$(APP_VERSION)\"
+CXXFLAGS += -I$(DEVKITPRO)/portlibs/switch/include -DAPP_VERSION_STR=\"$(APP_VERSION)\"
 LDFLAGS += -L$(DEVKITPRO)/portlibs/switch/lib
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
