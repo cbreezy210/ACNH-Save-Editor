@@ -66,22 +66,7 @@ Ensure your Switch is running Custom Firmware (Atmosphere).
 ### Standard Installation (SD Card)
 
 1. Download the latest `acnh_editor_v1.4.0.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
-2. Extract the `switch` folder to the **root** of your SD card. This creates the following structure:
-
-```text
-📦 SD (Root)
-┗━ 📂 switch
-   ┗━  acnh_editor
-      ├━ 📜 acnh_editor.nro
-      ├━ 📄 items.txt
-      ├━ 📄 font.ttf
-      ├━ 🖼️ icon.png
-      ├━ 📂 backups          <-- Auto-created folder for safety net
-      │  ┣━ 📄 backup_personal.dat
-      │  ━ 📄 backup_main.dat
-      └━ 📂 saves            <-- Auto-created folder for save dumps
-```
-
+2. Extract the `switch` folder to the **root** of your SD card.
 3. Fully close Animal Crossing: New Horizons (do not leave it suspended).
 4. Hold [R] and launch ACNH from the Home Menu to open the Homebrew Menu.
 5. Select "ACNH Save Editor" to launch (do **not** run ACNH at the same time!).
