@@ -1,5 +1,5 @@
 # 🗺️ ACNH Save Editor — Roadmap
-**The ACNH companion tool that never leaves your Switch.** 🍃
+**The ACNH companion tool that never leaves your Switch.**
 
 A native Nintendo Switch homebrew save editor for Animal Crossing: New Horizons — no PC required.
 
@@ -45,6 +45,8 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 - [x] Expanded 22-Item Roster — Bell bag, Bell voucher, 99,000 Bells, gold roses, cherry-blossom petal, pearl, gold bars, all 6 golden tools, and both crowns
 - [x] Embedded Homebrew Icon (community request) — Embedded the leaf PNG into the .nro so the Homebrew Menu displays the proper icon instead of the default loading icon
 - [x] In-App Title Bump — Title bar updated to "ACNH Save Editor v1.4"
+- [x] DBI/MTP Installation Support — Added dedicated DBI zip asset for easy MTP drag-and-drop installation
+- [x] Homebrew App Store Submission — Submitted for official listing on the ForTheUsers Homebrew App Store
 
 ## 🟡 Coming Next — v1.5.x (Decorations, Safety & Deep Edit Update)
 Target Release: Q4 2026
@@ -65,12 +67,12 @@ Target Release: Q4 2026
 ### 📦 Inventory & Storage
 - [ ] House Storage Editing — parse and edit the ~2,400+ slot storage array with pagination/search.
 
-### 🏝️ Island & Environment
+### ️ Island & Environment
 - [ ] Villager Management — force specific villagers to move in, kick out unwanted villagers, edit catchphrases.
 - [ ] Player Customization — edit Player Name, Appearance, Passport info, and Catchphrase.
 - [ ] Island Infrastructure — max out all bridges/inclines, change Native Fruit, force K.K. Slider songs.
 
-### 🧪 Quality of Life & QA
+###  Quality of Life & QA
 - [ ] Crash Logging — write a crash.log to the SD card on unrecoverable SDL2 errors for easy debugging.
 - [ ] Beta Testing Channel — establish a Discord/GitHub Pre-release channel for power users to test features early.
 - [ ] items.txt Build Docs — Document where the item database comes from for open-source contributors.
@@ -78,7 +80,7 @@ Target Release: Q4 2026
 ## 🟠 v1.6.0 — Residents, Market & Map Update
 Target Release: Early 2027
 
-### 👥 Multi-Resident Support
+###  Multi-Resident Support
 - [ ] Multi-Villager / Player Selector — edit Player 1–8 house blocks (Villager0–7, Base + player_index * 0x28A28); doubles as the community-requested Player/Account Selection.
 
 ### 💰 Money & Progression
@@ -92,7 +94,7 @@ Target Release: Early 2027
 ### 🧹 Map Chores Utility (NEW)
 - [ ] Weed / rock / spoiled-turnip cleanup + bulk item spawn on the map grid — the most-requested utility category in the ACNH tool scene.
 
-## 🏝️ v1.7.0 — Island Blueprint & Read-Only Insights
+## ️ v1.7.0 — Island Blueprint & Read-Only Insights
 Target Release: Mid 2027
 
 - [ ] Island Blueprint JSON Export (read-only, zero risk) — export your full island layout (terrain, paths, placed furniture, building positions) to a standardized JSON file.
