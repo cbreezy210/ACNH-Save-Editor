@@ -16,7 +16,7 @@ A 100% native Nintendo Switch homebrew application for editing Animal Crossing: 
 | 100% on-console (no PC, phone, or sysmodules required) | A companion app or web tool |
 | Clamped to in-game maximums (no impossible values) | A way to spawn unreleased/internal items |
 
-## ⚠️ CRITICAL LAUNCH INSTRUCTIONS
+## ️ CRITICAL LAUNCH INSTRUCTIONS
 For full memory and SD card access, you **MUST** launch this app via **Title Override** (hold [R] while launching a game like Animal Crossing) OR install it as a forwarder.
 
 **Do NOT launch it from the Album / Applet mode** — the app will refuse to run and show you exactly how to relaunch correctly, preventing save-access crashes!
@@ -48,7 +48,6 @@ sdmc:/switch/acnh_editor/backup_main.dat
 * All edits are clamped to in-game maximums (no impossible values)
 * Murmur3 hashes and EncryptedInt32 checksums are recalculated on every save
 * The app refuses to run in Applet Mode to prevent save-access crashes
-
 **Honest Note:** The backup is a single rolling slot (your last known-good state). For long-term archiving, occasionally copy these two files to your PC. Your island, your redundancy.
 
 ## ✅ Compatibility
@@ -64,28 +63,40 @@ Based on your feedback! Inject furniture, wallpapers, and flooring directly into
 ## 📥 Installation
 Ensure your Switch is running Custom Firmware (Atmosphere).
 
+### Standard Installation (SD Card)
+
 1. Download the latest `acnh_editor_v1.4.0.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
 2. Extract the `switch` folder to the **root** of your SD card. This creates the following structure:
 
 ```text
 📦 SD
-   ┗ 📂 switch
+   ┗  switch
       ┗ 📂 acnh_editor
          ┣ 📜 acnh_editor.nro
          ┣ 📄 items.txt
          ┣ 📄 font.ttf
-         ┗ 🖼️ icon.png
+         ┗ ️ icon.png
 ```
 
 3. Fully close Animal Crossing: New Horizons (do not leave it suspended).
 4. Hold [R] and launch ACNH from the Home Menu to open the Homebrew Menu.
 5. Select "ACNH Save Editor" to launch (do **not** run ACNH at the same time!).
 
+### Alternative Installation (DBI via MTP)
+
+For users with DBI installed on their Switch, you can install via USB MTP:
+
+1. Download `ACNH-Save-Editor-DBI-v1.4.0.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
+2. Connect your Switch to PC via USB.
+3. Launch DBI on your Switch and select **MTP responder**.
+4. On your PC, open the DBI MTP drive and navigate to **NAND Titles** or **SD Card**.
+5. Drag and drop the `acnh_editor.nro` file from the zip into the drive.
+6. Launch via Title Override (hold [R] on ACNH from Home Menu).
+
 ## 🎮 Controls
 | Button | Action |
 |---|---|
-| Up / Down | Navigate menus / Select items |
-| Left / Right | Step values (+/- 1) or navigate columns |
+| Up / Down | Navigate menus / Select items || Left / Right | Step values (+/- 1) or navigate columns |
 | L / R | Big step values (+/- 10 or 100,000) |
 | A | Backup to SD & Save changes to NAND (or select "Quit App") |
 | X | Open Favorites Menu |
