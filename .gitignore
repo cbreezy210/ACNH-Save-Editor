@@ -5,9 +5,9 @@ zipstage/
 
 # Local build artifacts (never commit)
 /build/
-/*.nro
-/*.elf
-/*.nacp
+*.nro
+*.elf
+*.nacp
 /romfs/
 /freshdump/
 /font.ttf
@@ -17,10 +17,3 @@ zipstage/
 ACNH_Master_Prompt.md
 *MASTER COPY KIT*.md
 icon.jpg
-switch/
-
-# Internal Docs & Build Folders
-ACNH_Master_Prompt.md
-*MASTER COPY KIT*.md
-icon.jpg
-switch/
