@@ -66,7 +66,7 @@ Ensure your Switch is running Custom Firmware (Atmosphere).
 
 ### Standard Installation (SD Card)
 
-1. Download the latest `acnh_editor_v1.4.0.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
+1. Download the latest `acnh_editor_v1.4.1.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
 2. Extract the `switch` folder to the **root** of your SD card.
 3. Verify your folder structure matches this exactly:
 
@@ -87,7 +87,7 @@ SD:/
 
 For users with DBI installed on their Switch, you can install via USB MTP:
 
-1. Download `ACNH-Save-Editor-DBI-v1.4.0.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
+1. Download `ACNH-Save-Editor-DBI-v1.4.1.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
 2. Connect your Switch to PC via USB.
 3. Launch DBI on your Switch and select **MTP responder**.
 4. On your PC, open the DBI MTP drive and navigate to **NAND Titles** or **SD Card**.
@@ -109,7 +109,7 @@ For users with DBI installed on their Switch, you can install via USB MTP:
 ## 🗺️ Roadmap & Known Gaps
 See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 
-**Known Gaps (v1.4.0):**
+**Known Gaps (v1.4.1):**
 * Single resident only (edits `/Villager0/`); multi-resident selector planned for v1.6
 * No map editing yet (weed/rock cleanup planned for v1.6)
 * No turnip price preview yet (under consideration for v1.6)
