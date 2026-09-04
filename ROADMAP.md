@@ -47,6 +47,8 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 - [x] In-App Title Bump — Title bar updated to "ACNH Save Editor v1.4"
 - [x] DBI/MTP Installation Support — Added dedicated DBI zip asset for easy MTP drag-and-drop installation
 - [x] Homebrew App Store Submission — Submitted for official listing on the ForTheUsers Homebrew App Store
+- [x] Applet Mode Guard — Hard-blocks Album/Applet launches with on-screen Title Override instructions to prevent permission-based crashes
+- [x] DBI/MTP Installation Support — Added dedicated DBI zip asset for easy MTP drag-and-drop installation
 
 ## 🟡 Coming Next — v1.5.x (Decorations, Safety & Deep Edit Update)
 Target Release: Q4 2026
