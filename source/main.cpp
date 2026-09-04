@@ -629,11 +629,16 @@ int main(int argc, char** argv) {
                 applyEdit(outP, MILES_OFF, g_vals[2]);
                 applyEdit(outM, LOAN_OFF, g_vals[3]);
 
+                // --- HEAL PRE-EXISTING CORRUPTION ---
+                // The old buggy app poisoned 8 per-villager fields in main.dat.
+                // We must explicitly zero them out to heal the save.
+                for (int i = 0; i < 8; i++) {
+                    uint32_t poison_off = 0x5B3D50 + (i * 0x74A40);
+                    WriteLE32(outM + poison_off, 0x00000000);
+                }
+
                 uint8_t* r = outP + POCKETS_BASE + (g_slot - 1) * 8;
                 WriteLE16(r, (uint16_t)g_newId); WriteLE16(r + 4, (uint16_t)g_newCount);
-
-                for (int i = 0; i < pRegC; i++) WriteLE32(outP + pReg[i].off, Murmur3Hash(outP + pReg[i].off + 4, pReg[i].len));
-                for (int i = 0; i < mRegC; i++) WriteLE32(outM + mReg[i].off, Murmur3Hash(outM + mReg[i].off + 4, mReg[i].len));
 
                 CryptACNH(pHdr, outP, pSz); CryptACNH(mHdr, outM, mSz);
 
@@ -786,21 +791,7 @@ int main(int argc, char** argv) {
                             fsFsClose(&sd2);
                         }
                         // 2) Re-heal all detected regions
-                        for (int i = 0; i < pRegC; i++) WriteLE32(personal + pReg[i].off, Murmur3Hash(personal + pReg[i].off + 4, pReg[i].len));
-                        for (int i = 0; i < mRegC; i++) WriteLE32(mainData + mReg[i].off, Murmur3Hash(mainData + mReg[i].off + 4, mReg[i].len));
-                        // 3) GAP HEURISTIC: heal regions whose stored hash was too damaged to detect
-                        auto healGaps = [&](uint8_t* buf, Region* arr, int cnt) {
-                            uint32_t prev = 0x100;
-                            for (int i = 0; i < cnt; i++) {
-                                if (arr[i].off > prev + 4 + 16) {
-                                    uint32_t glen = arr[i].off - prev - 4;
-                                    WriteLE32(buf + prev, Murmur3Hash(buf + prev + 4, glen));
-                                }
-                                prev = arr[i].off + 4 + arr[i].len;
-                            }
-                        };
-                        healGaps(personal, pReg, pRegC);
-                        healGaps(mainData, mReg, mRegC);
+                        
                         // 4) Re-apply EncryptedInt32 checksums on known fields
                         applyEdit(personal, WALLET_OFF, g_vals[0]);
                         applyEdit(personal, BANK_OFF, g_vals[1]);
