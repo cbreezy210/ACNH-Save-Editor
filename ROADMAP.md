@@ -48,7 +48,13 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 - [x] DBI/MTP Installation Support — Added dedicated DBI zip asset for easy MTP drag-and-drop installation
 - [x] Homebrew App Store Submission — Submitted for official listing on the ForTheUsers Homebrew App Store
 - [x] Applet Mode Guard — Hard-blocks Album/Applet launches with on-screen Title Override instructions to prevent permission-based crashes
-- [x] DBI/MTP Installation Support — Added dedicated DBI zip asset for easy MTP drag-and-drop installation
+
+## ✅ Shipped — v1.4.1 (Emergency Save-Corruption Hotfix)
+- [x] Root-caused the "Save data is damaged" bug — the legacy hash-healing routine stamped invalid values into 8 per-villager fields in main.dat, which the game rejects on boot
+- [x] Removed the aggressive region/hash rewriting from the save engine
+- [x] Permanent heal loop — restores the 8 fields to a clean state on every save
+- [x] Self-healing saves — saves corrupted by older versions are automatically repaired the next time you save (launch, make any edit, save once)
+- [x] Verified with controlled testing — deliberately corrupted a save, healed it with the new build, and confirmed a clean boot
 
 ## 🟡 Coming Next — v1.5.x (Decorations, Safety & Deep Edit Update)
 Target Release: Q4 2026
@@ -69,12 +75,12 @@ Target Release: Q4 2026
 ### 📦 Inventory & Storage
 - [ ] House Storage Editing — parse and edit the ~2,400+ slot storage array with pagination/search.
 
-### ️ Island & Environment
+### 🏝️ Island & Environment
 - [ ] Villager Management — force specific villagers to move in, kick out unwanted villagers, edit catchphrases.
 - [ ] Player Customization — edit Player Name, Appearance, Passport info, and Catchphrase.
 - [ ] Island Infrastructure — max out all bridges/inclines, change Native Fruit, force K.K. Slider songs.
 
-###  Quality of Life & QA
+### 🧪 Quality of Life & QA
 - [ ] Crash Logging — write a crash.log to the SD card on unrecoverable SDL2 errors for easy debugging.
 - [ ] Beta Testing Channel — establish a Discord/GitHub Pre-release channel for power users to test features early.
 - [ ] items.txt Build Docs — Document where the item database comes from for open-source contributors.
@@ -82,7 +88,7 @@ Target Release: Q4 2026
 ## 🟠 v1.6.0 — Residents, Market & Map Update
 Target Release: Early 2027
 
-###  Multi-Resident Support
+### 👥 Multi-Resident Support
 - [ ] Multi-Villager / Player Selector — edit Player 1–8 house blocks (Villager0–7, Base + player_index * 0x28A28); doubles as the community-requested Player/Account Selection.
 
 ### 💰 Money & Progression
@@ -96,7 +102,7 @@ Target Release: Early 2027
 ### 🧹 Map Chores Utility (NEW)
 - [ ] Weed / rock / spoiled-turnip cleanup + bulk item spawn on the map grid — the most-requested utility category in the ACNH tool scene.
 
-## ️ v1.7.0 — Island Blueprint & Read-Only Insights
+## 🧭 v1.7.0 — Island Blueprint & Read-Only Insights
 Target Release: Mid 2027
 
 - [ ] Island Blueprint JSON Export (read-only, zero risk) — export your full island layout (terrain, paths, placed furniture, building positions) to a standardized JSON file.
