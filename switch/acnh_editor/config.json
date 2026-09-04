@@ -1,10 +1,10 @@
-   {
-     "name": "ACNH Save Editor",
-     "author": "cbreezy210",
-     "version": "1.4.0",
-     "category": "tool",
-     "description": "Native Switch save editor for Animal Crossing: New Horizons. Edit Bells, Nook Miles, and items directly on console.",
-     "url": "https://github.com/cbreezy210/ACNH-Save-Editor/releases/latest",
-     "license": "MIT",
-     "license_url": "https://github.com/cbreezy210/ACNH-Save-Editor/blob/main/LICENSE"
-   }
+{
+  "name": "ACNH Save Editor",
+  "author": "cbreezy210",
+  "version": "1.4.1",
+  "category": "tool",
+  "description": "Native Switch save editor for ACNH. v1.4.1 includes an auto-repair feature to fix corrupted saves! Edit Bells, Nook Miles, and items directly on console.",
+  "url": "https://github.com/cbreezy210/ACNH-Save-Editor/releases/latest",
+  "license": "MIT",
+  "license_url": "https://github.com/cbreezy210/ACNH-Save-Editor/blob/main/LICENSE"
+}
