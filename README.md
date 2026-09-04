@@ -31,7 +31,7 @@ For full memory and SD card access, you **MUST** launch this app via **Title Ove
 * **Pocket Loadouts:** Press Y to save and load up to 5 custom pocket setups (Mining, Fishing, Terraforming) to your SD card.
 * **Bulletproof Safety Net:** Automatic SD card backups before every single write, byte-verified after creation. Press ZL on the main menu to instantly rollback to your last backup.
 * **Applet Mode Guard:** The app hard-blocks Album/Applet launches and shows on-screen instructions for relaunching correctly.
-* **Embedded Homebrew Icon:** The `.nro` now includes the custom
+* **Embedded Homebrew Icon:** The `.nro` now includes the custom icon.
 
 ## 🛡️ Backup System & Safety
 When loading a save on Switch, a full backup copy is created **before** any modification:
