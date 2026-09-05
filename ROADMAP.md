@@ -49,13 +49,6 @@ This file tracks what's shipped and what's coming next. Suggestions welcome — 
 - [x] Homebrew App Store Submission — Submitted for official listing on the ForTheUsers Homebrew App Store
 - [x] Applet Mode Guard — Hard-blocks Album/Applet launches with on-screen Title Override instructions to prevent permission-based crashes
 
-## ✅ Shipped — v1.4.1 (Emergency Save-Corruption Hotfix)
-- [x] Root-caused the "Save data is damaged" bug — the legacy hash-healing routine stamped invalid values into 8 per-villager fields in main.dat, which the game rejects on boot
-- [x] Removed the aggressive region/hash rewriting from the save engine
-- [x] Permanent heal loop — restores the 8 fields to a clean state on every save
-- [x] Self-healing saves — saves corrupted by older versions are automatically repaired the next time you save (launch, make any edit, save once)
-- [x] Verified with controlled testing — deliberately corrupted a save, healed it with the new build, and confirmed a clean boot
-
 ## 🟡 Coming Next — v1.5.x (Decorations, Safety & Deep Edit Update)
 Target Release: Q4 2026
 
