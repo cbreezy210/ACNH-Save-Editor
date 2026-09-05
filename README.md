@@ -16,12 +16,12 @@ A 100% native Nintendo Switch homebrew application for editing Animal Crossing: 
 | 100% on-console (no PC, phone, or sysmodules required) | A companion app or web tool |
 | Clamped to in-game maximums (no impossible values) | A way to spawn unreleased/internal items |
 
-## ️ CRITICAL LAUNCH INSTRUCTIONS
+## ⚠️ CRITICAL LAUNCH INSTRUCTIONS
 For full memory and SD card access, you **MUST** launch this app via **Title Override** (hold [R] while launching a game like Animal Crossing) OR install it as a forwarder.
 
 **Do NOT launch it from the Album / Applet mode** — the app will refuse to run and show you exactly how to relaunch correctly, preventing save-access crashes!
 
-## ✨ Features (v1.4.1)
+## ✨ Features (v1.4.0)
 * **Dual-File Engine:** Edits both `personal.dat` (Wallet, Bank, Pockets, Nook Miles) and `main.dat` (House Loan) simultaneously.
 * **Forensically Clean Save Engine & Auto-Repair:** Safely updates EncryptedInt32 checksums without overwriting untouched memory. Includes a permanent heal loop that automatically repairs saves corrupted by older versions the next time you save.
 * **Native Item Search:** Press Plus (+) to open the native Switch keyboard and instantly search the 13,000+ item database by name, with smooth paginated results. No more guessing hex codes!
@@ -66,7 +66,7 @@ Ensure your Switch is running Custom Firmware (Atmosphere).
 
 ### Standard Installation (SD Card)
 
-1. Download the latest `acnh_editor_v1.4.1.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
+1. Download the latest `acnh_editor_v1.4.0.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
 2. Extract the `switch` folder to the **root** of your SD card.
 3. Verify your folder structure matches this exactly:
 
@@ -87,7 +87,7 @@ SD:/
 
 For users with DBI installed on their Switch, you can install via USB MTP:
 
-1. Download `ACNH-Save-Editor-DBI-v1.4.1.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
+1. Download `ACNH-Save-Editor-DBI-v1.4.0.zip` from the [Releases](https://github.com/cbreezy210/ACNH-Save-Editor/releases) page.
 2. Connect your Switch to PC via USB.
 3. Launch DBI on your Switch and select **MTP responder**.
 4. On your PC, open the DBI MTP drive and navigate to **NAND Titles** or **SD Card**.
@@ -109,7 +109,7 @@ For users with DBI installed on their Switch, you can install via USB MTP:
 ## 🗺️ Roadmap & Known Gaps
 See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 
-**Known Gaps (v1.4.1):**
+**Known Gaps (v1.4.0):**
 * Single resident only (edits `/Villager0/`); multi-resident selector planned for v1.6
 * No map editing yet (weed/rock cleanup planned for v1.6)
 * No turnip price preview yet (under consideration for v1.6)
