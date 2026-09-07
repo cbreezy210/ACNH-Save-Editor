@@ -124,15 +124,19 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 ## ❓ Troubleshooting & FAQ
 
 **Q: The app won't launch, or it shows a black screen/error message.**
+
 **A:** You are likely launching from the Album (Applet Mode). Applet Mode restricts SD card and memory access. You **must** launch via Title Override: fully close ACNH, then hold [R] while launching the game from the Home Menu to enter the Homebrew Launcher.
 
 **Q: The app opens but shows a blank green screen with no text.**
+
 **A:** This usually means the `font.ttf` file is missing or in the wrong place. The graphical UI requires this specific font file to render text. Ensure `font.ttf` is located directly inside the `acnh_editor/` folder alongside the `.nro`. If you renamed the folder to `acnh-editor` (hyphen) or just `ACNH`, the app may also fail to find its assets. Rename the folder to exactly `acnh_editor` (underscore).
 
 **Q: Why can't I edit my second player's (Player 2) items or pockets?**
+
 **A:** v1.4.0 currently only edits the primary resident (`/Villager0/`). Multi-resident support (Player 1–8 selector) is actively being developed and planned for v1.6.0.
 
 **Q: My game crashed when I tried to save.**
+
 **A:** Ensure Animal Crossing is fully closed (not just suspended in the background) before launching the editor. Also, never run the editor and the game at the exact same time.
 
 ## 🛠️ Building from Source
