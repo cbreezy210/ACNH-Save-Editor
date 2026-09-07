@@ -54,19 +54,19 @@ Target Release: Q4 2026
 
 ### 🎨 Room Decorations (Community Priority)
 - [ ] Room Decorations Injector — v1.5.0 HEADLINE — Inject furniture, wallpapers, and flooring directly into player rooms. Requested by solamentenieves on GBATemp. Fills a major gap in on-console tools.
-- [ ] Furniture Placement Editor — Move, rotate, and scale placed items within a room grid.
-- [ ] Wallpaper/Flooring Swapper — Instantly change room aesthetics without buying/cataloguing items first.
+- [ ] Furniture Placement Editor — Move, rotate (4 directions), and scale placed items within a room grid, respecting in-game stacking and height limits.
+- [ ] Wallpaper/Flooring Swapper — Instantly change room aesthetics by writing directly to the room's catalog IDs without needing to buy/catalogue items first.
 
 ### 🛡️ Safety & Reliability
-- [ ] Backup Verification — Checksum/size validation after SD backup creation (abort write if 0-byte or mismatch to prevent corruption).
-- [ ] Game Version Validator — warn if save offsets don't match your game version (major.minor check).
-- [ ] "Dry Run" Preview Mode — see exactly what will change before writing to NAND.
-- [ ] Rolling Backup Manager — keep the last 3 backups with timestamps and version tracking.
-- [ ] "Safe Mode" Toggle — restrict edits to offline-safe values to prevent console bans.
-- [ ] Sanity Checks — automatically prevent impossible values (e.g., negative Bells, invalid Item IDs).
+- [ ] Backup Verification — Run a size and checksum validation after SD backup creation (abort write if 0-byte or mismatch to prevent silent corruption).
+- [ ] Game Version Validator — Warn the user if save offsets don't match their current ACNH game version (major.minor check) to prevent offset drift.
+- [ ] "Dry Run" Preview Mode — Show a summary screen of exactly what values will change before writing to NAND.
+- [ ] Rolling Backup Manager — Keep the last 3 backups with timestamps and version tracking, rather than a single rolling slot.
+- [ ] "Safe Mode" Toggle — Restrict edits to strictly offline-safe, in-game maximum values to prevent console bans.
+- [ ] Sanity Checks — Automatically prevent impossible values (e.g., negative Bells, invalid Item IDs, or out-of-bounds coordinates).
 
-### 📦 Inventory & Storage
-- [ ] House Storage Editing — parse and edit the ~2,400+ slot storage array with pagination/search.
+###  Inventory & Storage
+- [ ] House Storage Editing — Parse and edit the ~2,400+ slot storage array with pagination and native item search.
 
 ### 🏝️ Island & Environment
 - [ ] Villager Management — force specific villagers to move in, kick out unwanted villagers, edit catchphrases.

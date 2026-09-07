@@ -16,6 +16,12 @@ A 100% native Nintendo Switch homebrew application for editing Animal Crossing: 
 | 100% on-console (no PC, phone, or sysmodules required) | A companion app or web tool |
 | Clamped to in-game maximums (no impossible values) | A way to spawn unreleased/internal items |
 
+## 🆕 What's New in v1.4.0
+*   **Paginated Favorites Menu:** Browse 22 curated high-value items with smooth auto-scrolling and A-Z sorting.
+*   **Applet Mode Guard:** Hard-blocks Album launches to prevent permission-based crashes, with on-screen instructions to relaunch correctly.
+*   **Embedded Homebrew Icon:** The `.nro` now includes the custom leaf icon for the Homebrew Menu.
+*   **Search & UI Polish:** Fixed search footer overlaps, corrected pagination jumps, and added DBI/MTP drag-and-drop installation support.
+
 ## ⚠️ CRITICAL LAUNCH INSTRUCTIONS
 For full memory and SD card access, you **MUST** launch this app via **Title Override** (hold [R] while launching a game like Animal Crossing) OR install it as a forwarder.
 
@@ -114,6 +120,20 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 * No map editing yet (weed/rock cleanup planned for v1.6)
 * No turnip price preview yet (under consideration for v1.6)
 * No design pattern preview yet (planned for v1.7)
+
+## ❓ Troubleshooting & FAQ
+
+**Q: The app won't launch, or it shows a black screen/error message.**
+**A:** You are likely launching from the Album (Applet Mode). Applet Mode restricts SD card and memory access. You **must** launch via Title Override: fully close ACNH, then hold [R] while launching the game from the Home Menu to enter the Homebrew Launcher.
+
+**Q: I downloaded the zip, but the app shows a blank green screen or won't load.**
+**A:** This is usually a folder naming issue. The app specifically looks for the folder named `acnh_editor` (with an underscore). If your folder is named `acnh-editor` (with a hyphen) or just `ACNH`, it will fail. Rename the folder to exactly `acnh_editor`.
+
+**Q: Why can't I edit my second player's (Player 2) items or pockets?**
+**A:** v1.4.0 currently only edits the primary resident (`/Villager0/`). Multi-resident support (Player 1–8 selector) is actively being developed and planned for v1.6.0.
+
+**Q: My game crashed when I tried to save.**
+**A:** Ensure Animal Crossing is fully closed (not just suspended in the background) before launching the editor. Also, never run the editor and the game at the exact same time.
 
 ## 🛠️ Building from Source
 Requires devkitPro with switch-dev installed.
