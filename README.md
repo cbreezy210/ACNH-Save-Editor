@@ -65,7 +65,10 @@ sdmc:/switch/acnh_editor/backup_main.dat
 Tested by the author on FW 22.5.0 (Atmosphère 1.11.2 E). When Nintendo ships an ACNH update, compatibility is re-verified and noted in the changelog.
 
 ## 🎨 Coming in v1.5: Room Decorations Injector
-Based on your feedback! Inject furniture, wallpapers, and flooring directly into your rooms. Still deciding between Turnip Price Trends or DIY Recipe Unlocks for v1.6 — which would you rather see? Let us know on GitHub Discussions!
+Based on your feedback! Inject furniture, wallpapers, and flooring directly into your rooms. 
+
+**🗳️ Help Decide v1.6.0!** We're choosing between **Turnip Price Trends** and **DIY Recipe Unlocks** for the next major update. Cast your vote here: 
+👉 **[Vote in the Community Poll](https://github.com/cbreezy210/ACNH-Save-Editor/discussions/3)**
 
 ## 📥 Installation
 Ensure your Switch is running Custom Firmware (Atmosphere).
