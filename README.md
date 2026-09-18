@@ -124,7 +124,48 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 * No turnip price preview yet (under consideration for v1.6)
 * No design pattern preview yet (planned for v1.7)
 
-## ❓ Troubleshooting & FAQ
+## 🩺 Troubleshooting: "My edits didn't stick / counts reverted"
+
+If your changes vanish after jumping back into the game, work this checklist top to bottom — it resolves the vast majority of cases.
+
+### 0. First: breathe, your save is probably fine
+Both editors write a byte-verified backup before every change. If anything looks wrong, restore the backup (ACNH: **ZL** on the ready screen; PKHeX-NX: follow the on-screen restore prompt) and start over. Nothing below is worth risking a save over.
+
+### 1. Fully close the game before editing — the #1 cause
+A **suspended** game keeps its save state in memory. Edit while it's suspended (or resume a suspended session after editing) and the game writes its in-memory state back over your changes on the next autosave. It looks exactly like "my edits didn't stick."
+**Fix:** Home menu → highlight the game → **X → Close** → *then* edit → *then* relaunch. Never edit into a suspended session.
+
+### 2. Make sure you actually committed
+Edits live in the editor's memory until you run the step that writes them to the save file.
+- **ACNH Save Editor:** use the on-screen **Save/Quit** step (A). Exiting any other way discards your changes.
+- **PKHeX-NX:** complete the commit step and exit via **graceful quit** (v0.9.5+). Killing the applet mid-edit writes nothing.
+
+Not sure you committed? Reopen the editor: if the edited values aren't there, they were never written.
+
+### 3. On the DBI path? Make sure you re-imported
+The DBI workflow is export → edit the SD dump → **import back**. Editing the dump and launching the game without re-importing leaves the console save untouched. (Standard / Title-Override builds write in place and have no such step.)
+
+### 4. Check you edited the right target
+- **ACNH:** v1.4.0 edits the **primary resident's** wallet only — if you're playing as a different resident, wallet changes won't appear in your game (the resident selector arrives in v1.6). Bank and loan are island-wide, so those always apply.
+- **PKHeX-NX:** confirm the right box/slot — and remember multiple Switch profiles mean multiple save files.
+
+### 5. Check your version
+- **PKHeX-NX:** the header prints the version (v0.9.5+). No version line = pre-0.9.5 build → update.
+- **ACNH:** version shows on the title screen.
+
+Older builds predate commit and safety fixes. Always reproduce on the latest release.
+
+### Still stuck?
+Open a GitHub Issue (or ask in the GBATemp thread) with these five answers and most problems diagnose themselves in one reply:
+1. Which tool + version (header / title screen)
+2. Standard or DBI install
+3. Exactly what didn't stick (wallet, bank, IVs, items…)
+4. Game error, or silent revert?
+5. Was the game fully closed while editing?
+
+---
+
+## ❓ Launch, Display & Other FAQ
 
 **Q: The app won't launch, or it shows a black screen/error message.**
 
@@ -136,11 +177,11 @@ See [ROADMAP.md](ROADMAP.md) for the full list of shipped and planned features.
 
 **Q: Why can't I edit my second player's (Player 2) items or pockets?**
 
-**A:** v1.4.0 currently only edits the primary resident (`/Villager0/`). Multi-resident support (Player 1–8 selector) is actively being developed and planned for v1.6.0.
+**A:** v1.4.0 currently only edits the primary resident (`/Villager0/`). Multi-resident support (Player 1–8 selector) is actively being developed and planned for v1.6.0. *(See also step 4 of the checklist above — this is the most common "my edits didn't stick" cause.)*
 
 **Q: My game crashed when I tried to save.**
 
-**A:** Ensure Animal Crossing is fully closed (not just suspended in the background) before launching the editor. Also, never run the editor and the game at the exact same time.
+**A:** Ensure Animal Crossing is fully closed (not just suspended in the background) before launching the editor. Also, never run the editor and the game at the exact same time. *(Suspended sessions cause both crashes and silent reverts — this is step 1 of the checklist above.)*
 
 ## 🛠️ Building from Source
 Requires devkitPro with switch-dev installed.
