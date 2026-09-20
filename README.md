@@ -1,9 +1,15 @@
-# 🍃 ACNH Save Editor (Native Switch)
-**The ACNH companion tool that never leaves your Switch.**
+# ACNH Save Editor 🍃
+**The first 100% native Switch save editor for Animal Crossing: New Horizons.**
 
-A 100% native Nintendo Switch homebrew application for editing Animal Crossing: New Horizons save files directly on your console. No PC, no pulling the SD card, no complicated dumping tools required.
+![Status](https://img.shields.io/badge/Status-Stable-green?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Nintendo%20Switch-E60012?style=flat-square&logo=nintendo-switch&logoColor=white)
+![Language](https://img.shields.io/badge/Language-C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
+![License](https://img.shields.io/github/license/cbreezy210/ACNH-Save-Editor?style=flat-square&color=blue)
 
-[![Version](https://img.shields.io/github/v/release/cbreezy210/ACNH-Save-Editor)](https://github.com/cbreezy210/ACNH-Save-Editor/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/cbreezy210/ACNH-Save-Editor?include_prereleases&style=flat-square&color=blueviolet)](https://github.com/cbreezy210/ACNH-Save-Editor/releases) [![Total Downloads](https://img.shields.io/github/downloads/cbreezy210/ACNH-Save-Editor/total?style=flat-square&color=orange)](https://github.com/cbreezy210/ACNH-Save-Editor/releases)
+
+> **🍃 Milestone:** 1,000+ downloads across GitHub & GameBanana.
+> **🛡️ Safety Record:** 1,000+ installs, **zero lost saves**. Byte-verified backups + automatic hash healing.
 
 > **Note:** This is an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted islands or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo.
 >
