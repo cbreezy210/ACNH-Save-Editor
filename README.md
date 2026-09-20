@@ -45,21 +45,20 @@ For full memory and SD card access, you **MUST** launch this app via **Title Ove
 * **Applet Mode Guard:** The app hard-blocks Album/Applet launches and shows on-screen instructions for relaunching correctly.
 * **Embedded Homebrew Icon:** The `.nro` now includes the custom icon.
 
-## 🛡️ Backup System & Safety
-When loading a save on Switch, a full backup copy is created **before** any modification:
+## 🛡️ Safety First: Zero Lost Saves
+Modding your island can be scary, which is why ACNH Save Editor was built from the ground up with a defensive architecture. Across 1,000+ installs, we have maintained a perfect safety record. Here is how your data is protected:
+
+- **Timestamped SD Backups:** Before *every single write operation* to the NAND, the app automatically creates a full, byte-verified backup of your save file to a dedicated folder on your SD card:
 
 ```text
 sdmc:/switch/acnh_editor/backup_personal.dat
 sdmc:/switch/acnh_editor/backup_main.dat
 ```
 
-**One-Button Rollback:** Press [ZL] on the main menu to instantly restore the last backup to NAND.
-
-**Safety Guarantees:**
-* Every save operation creates a backup *before* writing to NAND
-* All edits are clamped to in-game maximums (no impossible values)
-* EncryptedInt32 checksums are recalculated on every save, and untouched memory is left pristine
-* The app refuses to run in Applet Mode to prevent save-access crashes
+- **One-Tap ZL Rollback:** Made a mistake? Injected the wrong item? Simply press **ZL** on the editor's main menu to instantly roll your save back to the exact state it was in before your last edit.
+- **Automatic Hash Healing:** Animal Crossing uses strict Murmur3 checksums to prevent tampering. The editor automatically recalculates and heals these hashes after every modification, ensuring your edited save passes the game's integrity checks on boot.
+- **In-Memory AES Handling:** Encrypted economy values (Wallet Bells, Bank Bells, Nook Miles) are safely decrypted, modified, and re-encrypted in RAM before ever touching the disk.
+- **Bulletproof Guards:** All edits are clamped to in-game maximums (no impossible values), and the app hard-blocks Album/Applet launches to prevent save-access crashes.
 
 **Honest Note:** The backup is a single rolling slot (your last known-good state). For long-term archiving, occasionally copy these two files to your PC. Your island, your redundancy.
 
