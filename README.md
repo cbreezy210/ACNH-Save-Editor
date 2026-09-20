@@ -5,7 +5,6 @@
 ![Platform](https://img.shields.io/badge/Platform-Nintendo%20Switch-E60012?style=flat-square&logo=nintendo-switch&logoColor=white)
 ![Language](https://img.shields.io/badge/Language-C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
 ![License](https://img.shields.io/github/license/cbreezy210/ACNH-Save-Editor?style=flat-square&color=blue)
-
 [![Latest Release](https://img.shields.io/github/v/release/cbreezy210/ACNH-Save-Editor?include_prereleases&style=flat-square&color=blueviolet)](https://github.com/cbreezy210/ACNH-Save-Editor/releases) [![Total Downloads](https://img.shields.io/github/downloads/cbreezy210/ACNH-Save-Editor/total?style=flat-square&color=orange)](https://github.com/cbreezy210/ACNH-Save-Editor/releases)
 
 > **🍃 Milestone:** 1,000+ downloads across GitHub & GameBanana.
