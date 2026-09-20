@@ -204,8 +204,8 @@ After building, copy `acnh_editor.nro` and `icon.png` from the repo root, along 
 
 ## 🔗 Explore More Projects
 - 🏠 **[cbreezy210 Main Profile](https://github.com/cbreezy210)** – See all my tools, AI projects, and community updates.
-- 🦖 **[TimeStranger-NX](https://github.com/cbreezy210/TimeStranger-NX)** – Native Digimon Story: Time Stranger Save Editor.
-- 🎮 **[PKHeX-NX](https://github.com/cbreezy210/PKHeX-NX)** – Native Pokémon SV Save Editor.
+- 💩 **[TimeStranger-NX](https://github.com/cbreezy210/TimeStranger-NX)** – Native Digimon Story: Time Stranger Save Editor.
+- 🔴⚪️ **[PKHeX-NX](https://github.com/cbreezy210/PKHeX-NX)** – Native Pokémon SV Save Editor.
 - 🍃 **[ACNH-Save-Editor](https://github.com/cbreezy210/ACNH-Save-Editor)** – Native Animal Crossing companion tool.
 
 ## 🙏 Credits
