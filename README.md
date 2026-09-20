@@ -9,6 +9,7 @@
 [![Latest Release](https://img.shields.io/github/v/release/cbreezy210/ACNH-Save-Editor?include_prereleases&style=flat-square&color=blueviolet)](https://github.com/cbreezy210/ACNH-Save-Editor/releases) [![Total Downloads](https://img.shields.io/github/downloads/cbreezy210/ACNH-Save-Editor/total?style=flat-square&color=orange)](https://github.com/cbreezy210/ACNH-Save-Editor/releases)
 
 > **🍃 Milestone:** 1,000+ downloads across GitHub & GameBanana.
+
 > **🛡️ Safety Record:** 1,000+ installs, **zero lost saves**. Byte-verified backups + automatic hash healing.
 
 > **Note:** This is an educational project. Always keep backups of your save files. Modifying save data always carries a risk. The author is not responsible for corrupted islands or banned consoles. Use offline and at your own risk. Not affiliated with Nintendo.
