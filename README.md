@@ -106,12 +106,14 @@ For users with DBI installed on their Switch, you can install via USB MTP:
 3. Launch DBI on your Switch and select **MTP responder**.
 4. On your PC, open the DBI MTP drive and navigate to **NAND Titles** or **SD Card**.
 5. Drag and drop the `acnh_editor.nro` file from the zip into the drive.
+   *(Note: The v1.4.0 DBI zip only includes the `.nro`. If you get a blank green screen, use the Standard zip instead, or manually copy `font.ttf` and `items.txt` into the folder. This is fully resolved in v1.5.0!)*
 6. Launch via Title Override (hold [R] on ACNH from Home Menu).
 
 ## 🎮 Controls
 | Button | Action |
 |---|---|
-| Up / Down | Navigate menus / Select items || Left / Right | Step values (+/- 1) or navigate columns |
+| Up / Down | Navigate menus / Select items |
+| Left / Right | Step values (+/- 1) or navigate columns |
 | L / R | Big step values (+/- 10 or 100,000) |
 | A | Backup to SD & Save changes to NAND (or select "Quit App") |
 | X | Open Favorites Menu |
