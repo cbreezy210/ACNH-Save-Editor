@@ -207,6 +207,13 @@ After building, copy `acnh_editor.nro` and `icon.png` from the repo root, along 
 - 💩 **[TimeStranger-NX](https://github.com/cbreezy210/TimeStranger-NX)** – Native Digimon Story: Time Stranger Save Editor.
 - 🔴⚪️ **[PKHeX-NX](https://github.com/cbreezy210/PKHeX-NX)** – Native Pokémon SV Save Editor.
 
+## 🤝 Contributing
+Contributions welcome! The most useful ways to help:
+- **Report issues** with the 5-answer checklist from Troubleshooting (tool + version, install type, what didn't stick, error vs. silent revert, game fully closed?).
+- **Save-format research:** PRs with verified offsets/checksums - include your diff method and dump tooling.
+- **Docs & accessibility guides:** wiki improvements and walkthroughs (micaturtle's accessibility guide set the bar!).
+Open an issue before large refactors so we can align on scope.
+
 ## 🙏 Credits
 * **kwsch and the NHSE project** — ACNH save-structure research and reference: https://github.com/kwsch/NHSE
 * **devkitPro and libnx communities** — Switch homebrew tooling: https://devkitpro.org
