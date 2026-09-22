@@ -109,7 +109,7 @@ For users with DBI installed on their Switch, you can install via USB MTP:
    *(Note: The v1.4.0 DBI zip only includes the `.nro`. If you get a blank green screen, use the Standard zip instead, or manually copy `font.ttf` and `items.txt` into the folder. This is fully resolved in v1.5.0!)*
 6. Launch via Title Override (hold [R] on ACNH from Home Menu).
 
-## 🎮 Controls
+## 🎮 Usage & Controls
 | Button | Action |
 |---|---|
 | Up / Down | Navigate menus / Select items |
@@ -212,6 +212,7 @@ Contributions welcome! The most useful ways to help:
 - **Report issues** with the 5-answer checklist from Troubleshooting (tool + version, install type, what didn't stick, error vs. silent revert, game fully closed?).
 - **Save-format research:** PRs with verified offsets/checksums - include your diff method and dump tooling.
 - **Docs & accessibility guides:** wiki improvements and walkthroughs (micaturtle's accessibility guide set the bar!).
+
 Open an issue before large refactors so we can align on scope.
 
 ## 🙏 Credits
