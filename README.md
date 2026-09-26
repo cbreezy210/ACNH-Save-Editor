@@ -202,10 +202,10 @@ make
 
 After building, copy `acnh_editor.nro` and `icon.png` from the repo root, along with `items.txt` and `font.ttf` from the `assets/` folder, to your SD card at `sdmc:/switch/acnh_editor/` before running.
 
-## 🔗 Explore More Projects
-- 🏠 **[cbreezy210 Main Profile](https://github.com/cbreezy210)** – See all my tools, AI projects, and community updates.
-- 💩 **[TimeStranger-NX](https://github.com/cbreezy210/TimeStranger-NX)** – Native Digimon Story: Time Stranger Save Editor.
-- 🔴⚪️ **[PKHeX-NX](https://github.com/cbreezy210/PKHeX-NX)** – Native Pokémon SV Save Editor.
+## 🔗 Explore the Native Switch Ecosystem
+- 🏠 **[cbreezy210 Main Profile](https://github.com/cbreezy210)** – See my AI projects, developer tools, and community updates.
+- 🔴⚪️ **[PKHeX-NX](https://github.com/cbreezy210/PKHeX-NX)** – Native Pokémon SV (Gen 9) Save Editor. No PC required.
+- 💩 **[TimeStranger-NX](https://github.com/cbreezy210/TimeStranger-NX)** – Native Digimon Story: Time Stranger Save Editor (In Development).
 
 ## 🤝 Contributing
 Contributions welcome! The most useful ways to help:
